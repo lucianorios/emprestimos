@@ -1,0 +1,33 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~ngx-toastr/toastr';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #f3f3f3; }
+
+table {
+  width: 100%;
+}
+
+.card-filtro{
+  margin-bottom: 15px;
+}
+
+.toast-container .ngx-toastr,
+.toast-container .ngx-toastr:hover {
+  box-shadow: none !important;
+}
+
+.cell-actions{
+  width: 100px;
+  text-align: center !important;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+mat-paginator {
+  display: flex !important;
+  justify-content: center !important;
+}

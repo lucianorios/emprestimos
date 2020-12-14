@@ -1,0 +1,35 @@
+<app-loading [isLoading]="isLoading" [diameter]="80"></app-loading>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title *ngIf="data.pessoaId > 0">{{pessoaModel.nome}}</mat-card-title>
+    <mat-card-title *ngIf="data.pessoaId == 0">Nova Pessoa</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form name="formFilter">
+      <mat-grid-list cols="1" rows="3" rowHeight="80px">
+        <mat-grid-tile>
+          <mat-form-field appearance="outline" class="grid-cell">
+            <mat-label>Nome</mat-label>
+            <input matInput [(ngModel)]="pessoaModel.nome" name="pessoa" placeholder="Informe o nome">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="outline" class="grid-cell">
+            <mat-label>Telefone</mat-label>
+            <input matInput [(ngModel)]="pessoaModel.telefone" name="telefone" mask="(00) 00000-0000" placeholder="Informe o telefone">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="outline" class="grid-cell">
+            <mat-label>E-mail</mat-label>
+            <input matInput type="email" [(ngModel)]="pessoaModel.email" name="email" placeholder="Informe o e-mail">
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button color="primary" class="btn-ok" (click)="salvar()">Salvar</button>
+    <button mat-raised-button color="warn" mat-dialog-close>Fechar</button>
+  </mat-card-actions>
+</mat-card>

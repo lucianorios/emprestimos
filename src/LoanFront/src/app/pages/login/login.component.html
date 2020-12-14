@@ -1,0 +1,27 @@
+<app-loading [isLoading]="isLoading" [diameter]="80"></app-loading>
+<div class="spacer">
+  <mat-card class="card-login">
+    <mat-card-content>
+      <form name="formFilter">
+        <mat-grid-list cols="1" rows="3" rowHeight="80px">
+          <mat-grid-tile>
+            <mat-form-field appearance="outline" class="grid-cell">
+              <mat-label>Login</mat-label>
+              <input matInput [(ngModel)]="userModel.login" name="login">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="outline" class="grid-cell">
+              <mat-label>Password</mat-label>
+              <input matInput [(ngModel)]="userModel.password" name="password" type="password">
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </form>
+
+    </mat-card-content>
+    <mat-card-actions align="center">
+      <button mat-raised-button color="primary" (click)="login()">Login</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

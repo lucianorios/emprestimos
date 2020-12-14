@@ -1,0 +1,56 @@
+<app-loading [isLoading]="isLoading" [diameter]="80"></app-loading>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Empréstimo</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form name="formFilter">
+      <mat-grid-list cols="1" rows="3" rowHeight="80px">
+        <mat-grid-tile>
+          <mat-form-field appearance="outline" class="grid-cell">
+            <mat-label>Data</mat-label>
+            <input matInput [matDatepicker]="dp" [(ngModel)]="emprestimoModel.data" name="data">
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp></mat-datepicker>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="outline" class="grid-cell">
+            <input type="text"
+                   placeholder="Selecione uma pessoa"
+                   matInput
+                   [(ngModel)]="pessoaNome"
+                   [formControl]="pessoasControl"
+                   [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
+            (optionSelected)="selecionarCliente($event)">
+              <mat-option *ngFor="let pessoa of pessoasOptions | async" [value]="pessoa">
+                {{pessoa.nome}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="outline" class="grid-cell">
+            <input type="text"
+                   placeholder="Selecione um item"
+                   matInput
+                   [(ngModel)]="itemNome"
+                   [formControl]="itensControl"
+                   [matAutocomplete]="itensAuto">
+            <mat-autocomplete autoActiveFirstOption #itensAuto="matAutocomplete"
+            (optionSelected)="selecionarItem($event)">
+              <mat-option *ngFor="let item of itensOptions | async" [value]="item">
+                {{item.nome}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button color="primary" class="btn-ok" (click)="salvar()">Salvar</button>
+    <button mat-raised-button color="warn" mat-dialog-close>Fechar</button>
+  </mat-card-actions>
+</mat-card>

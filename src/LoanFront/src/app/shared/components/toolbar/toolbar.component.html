@@ -1,0 +1,29 @@
+<p *ngIf="!isLoginPage()">
+  <mat-toolbar color="primary">
+    <button *ngIf="isInitialPage()" mat-icon-button [disabled]="true" aria-label="Controle de Empréstimos">
+      <mat-icon class="btn-back">menu_book</mat-icon>
+    </button>
+    <button *ngIf="!isInitialPage()" (click)="goToBack()" mat-icon-button aria-label="Voltar">
+      <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+    <span>Controle de Empréstimos</span>
+    <span class="sp-spacer"></span>
+    <button mat-icon-button [routerLink]="['/pessoa']" class="btn-icon favorite-icon" aria-label="Pessoas" title="Pessoas">
+      <mat-icon>person</mat-icon>
+    </button>
+    <button mat-icon-button [routerLink]="['/jogo']" class="btn-icon" aria-label="Example icon-button with share icon">
+      <mat-icon>videogame_asset</mat-icon>
+    </button>
+    <button mat-icon-button [routerLink]="['/']" class="btn-icon" aria-label="Empréstimos" title="Empréstimos">
+      <mat-icon>menu_book</mat-icon>
+    </button>
+    <button mat-icon-button class="btn-icon btn-logout" aria-label="Sair" title="Sair" (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>
+    </button>
+  </mat-toolbar>
+</p>
+<p *ngIf="isLoginPage()">
+  <mat-toolbar color="primary">
+    <span>Controle de Empréstimos</span>
+  </mat-toolbar>
+</p>

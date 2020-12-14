@@ -1,0 +1,66 @@
+<mat-card class="card-filtro">
+  <mat-card-header>
+    <mat-card-title>Filtro</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form name="formFilter">
+      <mat-grid-list cols="2" rows="2" rowHeight="80px">
+        <mat-grid-tile>
+          <mat-form-field appearance="outline" class="grid-cell">
+            <mat-label>Nome da pessoa</mat-label>
+            <input matInput [(ngModel)]="filterModel.nome" name="nome" (change)="getPessoas()">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="outline" class="grid-cell">
+            <mat-label>E-mail</mat-label>
+            <input matInput [(ngModel)]="filterModel.email" name="email" (change)="getPessoas()">
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+  </mat-card-content>
+</mat-card>
+<mat-card>
+  <app-loading [isLoading]="isLoading" [diameter]="80"></app-loading>
+
+  <mat-card-header>
+    <mat-card-title>Pessoas</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <table mat-table [dataSource]="dataSource" class="example-table">
+
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef>Nome</th>
+        <td mat-cell *matCellDef="let row">{{row.nome}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="telefone">
+        <th mat-header-cell *matHeaderCellDef>Telefone</th>
+        <td mat-cell *matCellDef="let row">{{row.telefone}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>E-mail</th>
+        <td mat-cell *matCellDef="let row">{{row.email}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="acoes">
+        <th mat-header-cell *matHeaderCellDef class="cell-actions">Ações</th>
+        <td mat-cell *matCellDef="let row" class="cell-actions">
+          <button mat-icon-button (click)="editarPessoa(row)" color="primary" aria-label="Editar" title="Editar">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="removerPessoa(row)" color="warn" aria-label="Remover" title="Remover Pessoa">
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="gridModel.columns"></tr>
+      <tr mat-row *matRowDef="let row; columns: gridModel.columns;"></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="gridModel.pageSizeOptions" [pageSize]="gridModel.pageSize" [length]="gridModel.totalRows" [pageSize]="gridModel.pageSize"></mat-paginator>
+  </mat-card-content>
+</mat-card>

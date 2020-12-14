@@ -1,0 +1,59 @@
+version: "3.3"
+
+networks:
+  loan-network:
+    driver: bridge  
+
+volumes:
+  db-data:
+
+services:
+
+  loan-db:
+    image: postgres:12.4
+    container_name: loan-db
+    hostname: loan-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123a321
+      POSTGRES_DB: LOAN
+    networks:
+      - loan-network
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    restart: always
+    
+  loan-back:
+    container_name: loan-back
+    image: loan-back
+    build:
+      context: ./src
+      dockerfile: ./Loan.WebApi/Dockerfile
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://*:5000
+      - WAIT_HOSTS=loan-db:5432
+    ports:
+      - "7001:5000"
+    depends_on:
+      - loan-db
+    networks:
+      - loan-network   
+
+  loan-front:
+    container_name: loan-front
+    image: loan-front
+    build:
+      context: ./src/LoanFront
+      dockerfile: ./Dockerfile
+    restart: always    
+    ports:
+      - "80:80"
+    depends_on:
+      - loan-db
+      - loan-back
+    networks:
+      - loan-network    

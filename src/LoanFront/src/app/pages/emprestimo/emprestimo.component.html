@@ -1,0 +1,87 @@
+<mat-card class="card-filtro">
+  <mat-card-header>
+    <mat-card-title>Filtro</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form name="formFilter">
+      <mat-grid-list cols="4" rows="2" rowHeight="80px">
+        <mat-grid-tile>
+          <mat-form-field appearance="outline" class="grid-cell">
+            <mat-label>Nome da pessoa</mat-label>
+            <input matInput [(ngModel)]="filterModel.pessoa" name="pessoa" (change)="getEmprestimos(true)">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="outline" class="grid-cell">
+            <mat-label>Item emprestado</mat-label>
+            <input matInput [(ngModel)]="filterModel.item" name="item" (change)="getEmprestimos(true)">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="outline" class="grid-cell">
+            <mat-label>Data</mat-label>
+            <input matInput [matDatepicker]="dp" [(ngModel)]="filterModel.data" name="data" (change)="getEmprestimos(true)">
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp></mat-datepicker>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile class="cell-toggle">
+          <mat-slide-toggle [(ngModel)]="filterModel.somenteCedidos" name="somenteCedidos" (change)="getEmprestimos(true)">Somente cedidos</mat-slide-toggle>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+  </mat-card-content>
+</mat-card>
+<mat-card>
+  <app-loading [isLoading]="isLoading" [diameter]="80"></app-loading>
+
+  <mat-card-header>
+    <mat-card-title>Empréstimos</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <table mat-table [dataSource]="dataSource" class="example-table">
+
+      <ng-container matColumnDef="pessoa">
+        <th mat-header-cell *matHeaderCellDef>Pessoa</th>
+        <td mat-cell *matCellDef="let row">{{row.pessoa.nome}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="item">
+        <th mat-header-cell *matHeaderCellDef>Item</th>
+        <td mat-cell *matCellDef="let row">{{row.item.nome}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="data">
+        <th mat-header-cell *matHeaderCellDef>Data do Empréstimo</th>
+        <td mat-cell *matCellDef="let row">{{row.data | date: 'dd/MM/yyyy'}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="devolucao">
+        <th mat-header-cell *matHeaderCellDef>Data de Devolução</th>
+        <td mat-cell *matCellDef="let row">{{row.devolucao | date: 'dd/MM/yyyy'}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="tempo">
+        <th mat-header-cell *matHeaderCellDef>Dias em Empréstimo</th>
+        <td mat-cell *matCellDef="let row">{{row.diasDecorridos}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="acoes">
+        <th mat-header-cell *matHeaderCellDef class="cell-actions">Ações</th>
+        <td mat-cell *matCellDef="let row" class="cell-actions">
+          <button mat-icon-button (click)="openPessoaDialog(row.pessoa)" aria-label="Dados da Pessoa" title="Dados da Pessoa">
+            <mat-icon>person</mat-icon>
+          </button>
+          <button mat-icon-button aria-label="Finalizar Empréstimo" (click)="finalizar(row.id)" title="Finalizar Empréstimo">
+            <mat-icon>playlist_add_check</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="gridModel.columns"></tr>
+      <tr mat-row *matRowDef="let row; columns: gridModel.columns;"></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="gridModel.pageSizeOptions" [length]="gridModel.totalRows" [pageSize]="gridModel.pageSize"></mat-paginator>
+  </mat-card-content>
+</mat-card>

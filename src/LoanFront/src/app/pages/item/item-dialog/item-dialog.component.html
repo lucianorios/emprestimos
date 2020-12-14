@@ -1,0 +1,23 @@
+<app-loading [isLoading]="isLoading" [diameter]="80"></app-loading>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title *ngIf="data.itemId > 0">{{itemModel.nome}}</mat-card-title>
+    <mat-card-title *ngIf="data.itemId == 0">Novo Item</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form name="formFilter">
+      <mat-grid-list cols="1" rows="3" rowHeight="80px">
+        <mat-grid-tile>
+          <mat-form-field appearance="outline" class="grid-cell">
+            <mat-label>Nome</mat-label>
+            <input matInput [(ngModel)]="itemModel.nome" name="item">
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button color="primary" class="btn-ok" (click)="salvar()">Salvar</button>
+    <button mat-raised-button color="warn" mat-dialog-close>Fechar</button>
+  </mat-card-actions>
+</mat-card>

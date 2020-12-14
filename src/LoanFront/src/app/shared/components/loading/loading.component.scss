@@ -1,0 +1,12 @@
+.loading-shadeDialog {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0px;
+  right: 0px;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
