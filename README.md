@@ -2,7 +2,7 @@
 
 Um app para gerenciamento de empréstimos de jogos para pessoas.
 
-Email-me: lucianorioss.@gmail.com
+Email-me: lucianorioss@gmail.com
 
 # Inicio
 
