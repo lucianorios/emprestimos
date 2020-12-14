@@ -8,7 +8,7 @@ Email-me: lucianorioss@gmail.com
 
 ## Instalação
 
-**Cloning the Repository**
+**Clonando o repositório**
 
 ```
 $ git clone https://github.com/lucianorios/emprestimos.git
@@ -16,7 +16,7 @@ $ git clone https://github.com/lucianorios/emprestimos.git
 $ cd emprestimos
 ```
 
-**Installing dependencies**
+**Instalando os projetos**
 
 ```
 $ cd Loan.WebApi && dotnet build
@@ -29,8 +29,8 @@ $ npm start
 ```
 
 
-## Docker support
-    Make sure both docker engine and docker-compose are installed
+## Docker
+    Você precisará do Docker Engine e Docker Compose instalados
 
 ```
 $ git clone https://github.com/lucianorios/emprestimos.git
